@@ -54,8 +54,8 @@ void recursive_part(int *arr, int low, int heigh, size_t size)
 	{
 		int pivot = partition_part(arr, low, heigh, size);
 
-		recursive_part(arr, low, pivot - 1, size);
 		recursive_part(arr, pivot + 1, heigh, size);
+		recursive_part(arr, low, pivot - 1, size);
 	}
 }
 
