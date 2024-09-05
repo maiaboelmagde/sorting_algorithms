@@ -25,6 +25,7 @@ int partition_part(int *arr, int low, int heigh, size_t size)
 				arr[counter] += arr[i];
 				arr[i] = arr[counter] - arr[i];
 				arr[counter] -= arr[i];
+				print_array(arr, size);
 			}
 		}
 	}
