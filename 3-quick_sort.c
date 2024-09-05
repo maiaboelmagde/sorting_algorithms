@@ -2,24 +2,30 @@
 
 int partition_part(int *arr, int low, int heigh, size_t size)
 {
-    int i;
-    int pivot = heigh;
-    for (i = low; i < heigh; i++)
-    {
-        if (arr[i] > arr[pivot])
-        {
-            arr[i] += arr[pivot];
-            arr[pivot] = arr[i] - arr[pivot];
-            arr[i] -= arr[pivot];
 
-            print_array(arr, size);
-            pivot = i;
-            break;
+    int i, counter = low-1, pivot = arr[heigh];
+    for (i = low; i <= heigh; i++)
+    {
+        if (arr[i] < pivot)
+        {
+            counter++;
+            if (counter != i)
+            {
+                arr[counter] += arr[i];
+                arr[i] = arr[counter] - arr[i];
+                arr[counter] -= arr[i];
+            }
         }
         
     }
-    return pivot;
-    
+    if (counter + 1 != heigh)
+    {
+        arr[counter + 1] += arr[heigh];
+        arr[heigh] = arr[counter + 1 ] - arr[heigh];
+        arr[counter + 1] -= arr[heigh];
+    }
+    print_array(arr, size);
+    return (counter + 1);
 }
 
 void recursive_part(int *arr, int low, int heigh, size_t size)
@@ -28,7 +34,7 @@ void recursive_part(int *arr, int low, int heigh, size_t size)
     {
         int pivot = partition_part(arr, low, heigh, size);
         recursive_part(arr, low, pivot - 1, size);
-        recursive_part(arr, pivot+1, heigh, size);
+        recursive_part(arr, pivot + 1, heigh, size);
     }
     
 }
